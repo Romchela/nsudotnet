@@ -8,7 +8,6 @@
 
 	public class Options
 	{
-
 		public CryptMode Mode { get; set; }
 		public AlgorithmType Type { get; set; }
 		public string SourceFilePath { get; set; }

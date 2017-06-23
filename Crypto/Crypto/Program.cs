@@ -7,12 +7,11 @@ namespace Crypto
 
 		static void Main(string[] args)
 		{
-
 			try
 			{
 				var opt = CommandLineParser.Parse(args);
 
-				if(opt.Mode == CryptMode.Encrypt)
+				if (opt.Mode == CryptMode.Encrypt)
 				{
 					FileEncryptor.Encrypt(opt.SourceFilePath, opt.TargetFilePath, opt.KeyFilePath, opt.Type);
 				}
@@ -30,8 +29,6 @@ namespace Crypto
 				Console.WriteLine(e.Message);
 				return;
 			}
-
-
 		}
 	}
 }

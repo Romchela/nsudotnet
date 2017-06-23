@@ -7,7 +7,7 @@ namespace Crypto
 	{
 		public static Options Parse(string[] args)
 		{
-			if(args.Length == 4 || args.Length == 5)
+			if (args.Length == 4 || args.Length == 5)
 			{
 				var opt = new Options()
 				{

@@ -9,7 +9,7 @@ namespace Crypto
 		public static void Encrypt(string sourceFile, string outputFile, string keyFile, AlgorithmType algType)
 		{
 			// Check arguments.
-			if(sourceFile == null)
+			if (sourceFile == null)
 				throw new ArgumentNullException("sourceFile");
 
 			if (outputFile == null)
@@ -51,7 +51,7 @@ namespace Crypto
 		}
 
 
-		public static void  Decrypt(string sourceFile, string keyFile, string outputFile, AlgorithmType algType)
+		public static void Decrypt(string sourceFile, string keyFile, string outputFile, AlgorithmType algType)
 		{
 			// Check arguments.
 			if (sourceFile == null)
