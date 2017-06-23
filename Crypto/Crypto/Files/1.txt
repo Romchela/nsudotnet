@@ -1,0 +1,4 @@
+Description: User created a MDR Report, for a project which consists of two tasks- these two tasks have different workflows. 
+ZF NH-Bericht 2016 en 170530-1.idml -> Preparation, Translation, Correction1, Correction2
+2_ZF NH-Bericht 2016 en 170530-1.idml -> Preparation, Translation, Correction
+Both documents were checked in during different time periods (see Screenshot-folder)
