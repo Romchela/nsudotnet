@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Crypto
 {
+
 	class FileEncryptor
 	{
 		public static void Encrypt(string sourceFile, string outputFile, string keyFile, AlgorithmType algType)
@@ -18,34 +20,36 @@ namespace Crypto
 			if (keyFile == null)
 				throw new ArgumentNullException("keyFile");
 
+
 			using (SymmetricAlgorithm alg = CreateSymmetricAlgorithm(algType))
 			{
 				// Create a decrytor to perform the stream transform.
 				ICryptoTransform encryptor = alg.CreateEncryptor(alg.Key, alg.IV);
 
 				// Create the streams used for encryption.
-				using (FileStream msEncrypt = new FileStream(outputFile, FileMode.Create))
+				using (FileStream outputStream = new FileStream(outputFile, FileMode.Create))
 				{
-					using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+					using (CryptoStream cryptoStream = new CryptoStream(outputStream, encryptor, CryptoStreamMode.Write))
 					{
-						using (FileStream fsIn = new FileStream(sourceFile, FileMode.Open))
+						using (FileStream inputStream = new FileStream(sourceFile, FileMode.Open))
 						{
-							int data;
-							while ((data = fsIn.ReadByte()) != -1)
-							{
-								csEncrypt.WriteByte((byte)data);
-							}
+							inputStream.CopyTo(cryptoStream);
+							inputStream.Close();
 						}
 					}
+					outputStream.Close();
 				}
 
-				// read key and IV
-				using (BinaryWriter writer = new BinaryWriter(File.Open(keyFile, FileMode.OpenOrCreate)))
+				// write key
+				using (var keyStream = new FileStream(keyFile, FileMode.Create))
 				{
-					writer.Write(alg.Key.Length);
-					writer.Write(alg.Key);
-					writer.Write(alg.IV.Length);
-					writer.Write(alg.IV);
+					var iv = Encoding.ASCII.GetBytes(Convert.ToBase64String(alg.IV));
+					var key = Encoding.ASCII.GetBytes(Convert.ToBase64String(alg.Key));
+					var endline = Encoding.ASCII.GetBytes("\n");
+					keyStream.Write(iv, 0, iv.Length);
+					keyStream.Write(endline, 0, 1);
+					keyStream.Write(key, 0, key.Length);
+					keyStream.Close();
 				}
 			}
 		}
@@ -65,34 +69,39 @@ namespace Crypto
 
 			using (SymmetricAlgorithm alg = CreateSymmetricAlgorithm(algType))
 			{
-				using (BinaryReader reader = new BinaryReader(File.Open(keyFile, FileMode.Open)))
+
+				// read key
+				using (var keyStream = new StreamReader(keyFile))
 				{
-					if (reader.PeekChar() > -1)
+					string ivString = keyStream.ReadLine();
+					string keyString = keyStream.ReadLine();
+					keyStream.Close();
+
+					if (ivString == null || keyString == null)
 					{
-						int lenght = reader.ReadInt32();
-						alg.Key = reader.ReadBytes(lenght);
-						lenght = reader.ReadInt32();
-						alg.IV = reader.ReadBytes(lenght);
+						throw new Exception("Invalid key or IV");
 					}
+
+					alg.IV = Convert.FromBase64String(ivString);
+					alg.Key = Convert.FromBase64String(keyString);
 				}
 
-				using (FileStream fsCrypt = new FileStream(sourceFile, FileMode.Open))
+				using (FileStream inputStream = new FileStream(sourceFile, FileMode.Open))
 				{
-					using (FileStream fsOut = new FileStream(outputFile, FileMode.Create))
+					using (FileStream outputStream = new FileStream(outputFile, FileMode.Create))
 					{
 						using (ICryptoTransform decryptor = alg.CreateDecryptor(alg.Key, alg.IV))
 						{
-							using (CryptoStream cs = new CryptoStream(fsCrypt, decryptor, CryptoStreamMode.Read))
+							using (CryptoStream cryptoStream = new CryptoStream(inputStream, decryptor, CryptoStreamMode.Read))
 							{
-								int data;
-								while ((data = cs.ReadByte()) != -1)
-								{
-									fsOut.WriteByte((byte)data);
-								}
+								cryptoStream.CopyTo(outputStream);
+								inputStream.Close();
 							}
 						}
+						outputStream.Close();
 					}
 				}
+
 			}
 		}
 

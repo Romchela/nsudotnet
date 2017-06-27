@@ -8,15 +8,15 @@ namespace NumberGuesser
 	{
 		private static int _maxValue = 100;
 		private static int _historyLength = 1000;
-		private static string[] _abusePhrases = { "You are stupid!", "You are not right!" };
+		private static string[] _abusePhrases = { "{0}, you are stupid!", "You are not right {0}!", "Can you clarify {0} what you mean?", "You are smart man {0}!" };
 
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Hello! Type your name...");
-			string userName = Console.ReadLine();
-			Random random = new Random();
-			int key = random.Next(_maxValue + 1);
-			string[] queries = new string[_historyLength];
+			var userName = Console.ReadLine();
+			var random = new Random();
+			var key = random.Next(_maxValue + 1);
+			var queries = new string[_historyLength];
 			int qNumber = 0;
 			DateTime startTime = DateTime.Now;
 
@@ -68,7 +68,7 @@ namespace NumberGuesser
 				if (qNumber % 4 == 0)
 				{
 					string abuse = _abusePhrases[random.Next(_abusePhrases.Length)];
-					Console.WriteLine(abuse);
+					Console.WriteLine(abuse, userName);
 				}
 			}
 		}

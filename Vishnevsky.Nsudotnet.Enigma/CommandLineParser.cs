@@ -30,8 +30,8 @@ namespace Crypto
 				}
 				else
 				{
-					string extention = Path.GetExtension(opt.TargetFilePath);
-					opt.KeyFilePath = Path.ChangeExtension(opt.TargetFilePath, "key" + extention);
+					string extention = Path.GetExtension(opt.SourceFilePath);
+					opt.KeyFilePath = Path.ChangeExtension(opt.SourceFilePath, "key" + extention);
 				}
 
 				return opt;
@@ -44,8 +44,8 @@ namespace Crypto
 
 		public static void ShowUsage()
 		{
-			Console.WriteLine("crypto.exe encrypt sourceFilePath aes|des|rc2|Rijndael  outputFilePath");
-			Console.WriteLine("crypto.exe decrypt sourceFilePath aes|des|rc2|Rijndael  keyFilePath outputFilePath");
+			Console.WriteLine("{0} encrypt sourceFilePath aes|des|rc2|Rijndael  outputFilePath", System.AppDomain.CurrentDomain.FriendlyName);
+			Console.WriteLine("{0} decrypt sourceFilePath aes|des|rc2|Rijndael  keyFilePath outputFilePath", System.AppDomain.CurrentDomain.FriendlyName);
 		}
 
 		public static AlgorithmType ParseCryptoType(string type)
