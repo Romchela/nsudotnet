@@ -29,7 +29,7 @@ namespace LineCounter
 			return File.ReadLines(filePath).Where(line => IsLineInvolved(line, rowRegExp)).Count();
 		}
 
-		public static int GetPropjectLines(string dirPath, string fileFilter, string rowFilter)
+		public static int GetProjectLines(string dirPath, string fileFilter, string rowFilter)
 		{
 			DirectoryInfo dir = new DirectoryInfo(dirPath);
 
@@ -52,7 +52,7 @@ namespace LineCounter
 				}
 				else
 				{
-					int lines = GetPropjectLines(options.Directory, options.FileFilter, options.RowFilter);
+					int lines = GetProjectLines(options.Directory, options.FileFilter, options.RowFilter);
 					Console.WriteLine(lines);
 				}
 			}
