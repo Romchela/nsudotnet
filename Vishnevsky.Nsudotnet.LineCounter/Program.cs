@@ -33,7 +33,7 @@ namespace LineCounter
 		{
 			DirectoryInfo dir = new DirectoryInfo(dirPath);
 
-			return dir.GetFiles(fileFilter, SearchOption.AllDirectories)
+			return dir.EnumerateFiles(fileFilter, SearchOption.AllDirectories)
 				.Sum(f => GetFileLines(f.FullName, rowFilter));
 		}
 
