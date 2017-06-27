@@ -24,12 +24,12 @@ namespace LineCounter
 			return true;
 		}
 
-		static public int GetFileLines(string filePath, string rowRegExp)
+		public static int GetFileLines(string filePath, string rowRegExp)
 		{
 			return File.ReadLines(filePath).Where(line => IsLineInvolved(line, rowRegExp)).Count();
 		}
 
-		static public int GetPropjectLines(string dirPath, string fileFilter, string rowFilter)
+		public static int GetPropjectLines(string dirPath, string fileFilter, string rowFilter)
 		{
 			DirectoryInfo dir = new DirectoryInfo(dirPath);
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{115B61EA-C26C-4260-ABD4-748601CEC774}</ProjectGuid>
+    <ProjectGuid>{312E695D-36B6-4646-888A-B04E93B83335}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LineCounter</RootNamespace>
-    <AssemblyName>LineCounter</AssemblyName>
+    <RootNamespace>LinesCounter</RootNamespace>
+    <AssemblyName>LinesCounter</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLineArgumentsParser, Version=3.0.12.0, Culture=neutral, PublicKeyToken=16ad7bf6f4a1666c, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineArgumentsParser.3.0.12\lib\net45\CommandLineArgumentsParser.dll</HintPath>
+      <HintPath>packages\CommandLineArgumentsParser.3.0.12\lib\net45\CommandLineArgumentsParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
