@@ -34,10 +34,8 @@ namespace Crypto
 						using (FileStream inputStream = new FileStream(sourceFile, FileMode.Open))
 						{
 							inputStream.CopyTo(cryptoStream);
-							inputStream.Close();
 						}
 					}
-					outputStream.Close();
 				}
 
 				// write key
@@ -49,7 +47,6 @@ namespace Crypto
 					keyStream.Write(iv, 0, iv.Length);
 					keyStream.Write(endline, 0, 1);
 					keyStream.Write(key, 0, key.Length);
-					keyStream.Close();
 				}
 			}
 		}
@@ -75,7 +72,6 @@ namespace Crypto
 				{
 					string ivString = keyStream.ReadLine();
 					string keyString = keyStream.ReadLine();
-					keyStream.Close();
 
 					if (ivString == null || keyString == null)
 					{
@@ -95,10 +91,8 @@ namespace Crypto
 							using (CryptoStream cryptoStream = new CryptoStream(inputStream, decryptor, CryptoStreamMode.Read))
 							{
 								cryptoStream.CopyTo(outputStream);
-								inputStream.Close();
 							}
 						}
-						outputStream.Close();
 					}
 				}
 
