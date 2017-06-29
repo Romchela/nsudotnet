@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vishnevsky.Nsudotnet.LineCounter", "Vishnevsky.Nsudotnet.LineCounter.csproj", "{312E695D-36B6-4646-888A-B04E93B83335}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vishnevsky.Nsudotnet.LinesCounter", "Vishnevsky.Nsudotnet.LinesCounter.csproj", "{312E695D-36B6-4646-888A-B04E93B83335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

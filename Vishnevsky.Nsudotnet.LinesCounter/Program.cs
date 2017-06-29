@@ -23,7 +23,7 @@ namespace LineCounter
 				else
 				{
 					var counter = new Counter();
-					int lines = counter.GetProjectLines(options.Directory, options.FileFilter, options.RowFilter);
+					int lines = counter.GetPropjectLines(options.Directory, options.FileFilter, options.RowFilter);
 					Console.WriteLine(lines);
 				}
 			}

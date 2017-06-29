@@ -23,7 +23,7 @@ namespace LinesCounter
 		/// <param name="fileFilter"> e.g. *.cs </param>
 		/// <param name="rowFilter">Regular expression to exclude line</param>
 		/// <returns></returns>
-		public int GetProjectLines(string folder, string fileFilter, string rowFilter)
+		public int GetPropjectLines(string folder, string fileFilter, string rowFilter)
 		{
 			DirectoryInfo dir = new DirectoryInfo(folder);
 
